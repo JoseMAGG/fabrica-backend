@@ -1,4 +1,4 @@
-package com.udea.Fabrica_g6_v2;
+package com.udea;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
