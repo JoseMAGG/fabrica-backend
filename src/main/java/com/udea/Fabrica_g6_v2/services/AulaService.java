@@ -1,8 +1,7 @@
 package com.udea.Fabrica_g6_v2.services;
 
-import com.udea.Fabrica_g6_v2.models.Materia;
-
-import com.udea.Fabrica_g6_v2.repositories.MateriaRepository;
+import com.udea.Fabrica_g6_v2.models.Aula;
+import com.udea.Fabrica_g6_v2.repositories.AulaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,13 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MateriaService {
+public class AulaService {
     @Autowired
-    MateriaRepository materiaRepository;
-
-    public List<Materia> findAll(){
+    AulaRepository aulaRepository;
+    public List<Aula> findAll(){
         //capturar y enviar los elementos de la bas de datos
-        return materiaRepository.findAll();
+        return aulaRepository.findAll();
 
     }
 
@@ -27,10 +25,10 @@ public class MateriaService {
 
     //crear un Nuevo elemento
 
-    public ResponseEntity<Materia> save(@RequestBody Materia materia){
+    public ResponseEntity<Aula> save(@RequestBody Aula aula){
 
         //guardar
-        Materia result= materiaRepository.save(materia);
+        Aula result=aulaRepository.save(aula);
 
         return  ResponseEntity.ok(result);
     }
@@ -40,12 +38,12 @@ public class MateriaService {
 
     //buscar segun su id
 
-    public ResponseEntity<Materia> findById(@PathVariable Long id){
+    public ResponseEntity<Aula> findById(@PathVariable String id){
         //usamos siempre un optional para no tratar con excepciones de alcance por id, debido a un id incorrecto
-        Optional<Materia> optionalMateria= materiaRepository.findById(id);
-        if(optionalMateria.isPresent())
+        Optional<Aula> optionalAula=aulaRepository.findById(id);
+        if(optionalAula.isPresent())
             //si existe lo devuelvo
-            return  ResponseEntity.ok(optionalMateria.get());
+            return  ResponseEntity.ok(optionalAula.get());
         else
             //si no existe debolvemos un 404 con un response entity
             return ResponseEntity.notFound().build();
@@ -56,12 +54,12 @@ public class MateriaService {
 
     //borrar un elemento de la DB
 
-    public ResponseEntity<Materia> delete(@PathVariable Long id){
+    public ResponseEntity<Aula> delete(@PathVariable String id){
 
-        if (!materiaRepository.existsById(id)) { //si el Id NO existe (NUMEO MUY GRANDE)
+        if (!aulaRepository.existsById(id)) { //si el Id NO existe (NUMEO MUY GRANDE)
             return ResponseEntity.notFound().build();
         }
-        materiaRepository.deleteById(id);
+        aulaRepository.deleteById(id);
         return ResponseEntity.noContent().build();
 
     }
@@ -71,15 +69,15 @@ public class MateriaService {
 
     //actualizar un elemento existente
 
-    public ResponseEntity<Materia> update(@RequestBody Materia materia){
-        if(materia.getId()==null){ //no le mande un id
+    public ResponseEntity<Aula> update(@RequestBody Aula aula){
+        if(aula.getId()==null){ //no le mande un id
             return ResponseEntity.badRequest().build();
         }
-        if(!materiaRepository.existsById(materia.getId())){ //si el Id NO existe (NUMEO MUY GRANDE)
+        if(!aulaRepository.existsById(aula.getId())){ //si el Id NO existe (NUMEO MUY GRANDE)
             return ResponseEntity.notFound().build();
         }
         //de lo contrario
-        Materia result= materiaRepository.save(materia);
+        Aula result=aulaRepository.save(aula);
         return ResponseEntity.ok(result);
 
 

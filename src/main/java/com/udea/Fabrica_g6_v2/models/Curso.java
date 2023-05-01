@@ -10,7 +10,7 @@ public class Curso {
     private Long codigoCurso;
 
     @OneToOne
-    @JoinColumn(name = "id_materia", referencedColumnName = "id_materia",insertable = false, updatable = false)
+    @JoinColumn(name = "id_materia", referencedColumnName = "id_materia")
     private Materia idMateria;
 
     @Column(name="credits_number")
