@@ -9,24 +9,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/decanos")
 public class DecanoController {
     //atributos
-
     @Autowired
     DecanoService decanoService;
-
-
     //recordemos que el service(-->repository) es quien contiene las cualidades se aplicarsele "QUERYS" por ende lo nesesitamos para poder "usarlos"
-
-
 //CRUD sobre la entidad
 
-    @GetMapping("/api/decanos")
+    @GetMapping("/find-all")
     public List<Decano> findAll() {
         return decanoService.findAll();
     }
 
-    @PostMapping("/api/decanos")
+    @PostMapping("/save")
     public ResponseEntity<Decano> save(@RequestBody Decano decano) {
         return decanoService.save(decano);
     }
@@ -36,13 +32,12 @@ public class DecanoController {
         return decanoService.findById(id);
     }
 
-
-    @DeleteMapping("/api/decanos/{id}")
+    @DeleteMapping("/find-by-id/{id}")
     public ResponseEntity<Decano> delete(@PathVariable Long id) {
         return decanoService.delete(id);
     }
 
-    @PutMapping("/api/decanos")
+    @PutMapping("/update")
     public ResponseEntity<Decano> update(@RequestBody Decano decano) {
         return decanoService.update(decano);
     }

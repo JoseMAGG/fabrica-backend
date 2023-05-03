@@ -9,31 +9,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/cursos")
 public class CursoController {
     @Autowired
     CursoService cursoService;
 
-    @GetMapping("/api/cursos")
+    @GetMapping("/find-all")
     public List<Curso> findAll(){
         return cursoService.findAll();
     }
 
-    @PostMapping("/api/cursos")
+    @PostMapping("/save")
     public ResponseEntity<Curso> save(@RequestBody Curso curso){
         return cursoService.save(curso);
     }
 
-    @GetMapping("/api/cursos/{id}")
+    @GetMapping("/find-by-id/{id}")
     public ResponseEntity<Curso> findById(@PathVariable Long id){
         return cursoService.findById(id);
     }
 
-    @DeleteMapping("/api/cursos/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Curso> delete(@PathVariable Long id){
         return cursoService.delete(id);
     }
 
-    @PutMapping("/api/cursos")
+    @PutMapping("/update")
     public ResponseEntity<Curso> update(@RequestBody Curso curso){
         return cursoService.update(curso);
     }

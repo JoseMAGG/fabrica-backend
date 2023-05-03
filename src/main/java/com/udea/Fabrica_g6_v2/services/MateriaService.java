@@ -28,10 +28,8 @@ public class MateriaService {
     //crear un Nuevo elemento
 
     public ResponseEntity<Materia> save(@RequestBody Materia materia){
-
         //guardar
         Materia result= materiaRepository.save(materia);
-
         return  ResponseEntity.ok(result);
     }
 
@@ -72,10 +70,10 @@ public class MateriaService {
     //actualizar un elemento existente
 
     public ResponseEntity<Materia> update(@RequestBody Materia materia){
-        if(materia.getId()==null){ //no le mande un id
+        if(materia.getIdMateria()==null){ //no le mande un id
             return ResponseEntity.badRequest().build();
         }
-        if(!materiaRepository.existsById(materia.getId())){ //si el Id NO existe (NUMEO MUY GRANDE)
+        if(!materiaRepository.existsById(materia.getIdMateria())){ //si el Id NO existe (NUMEO MUY GRANDE)
             return ResponseEntity.notFound().build();
         }
         //de lo contrario

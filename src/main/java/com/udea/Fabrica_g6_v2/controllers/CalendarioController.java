@@ -9,64 +9,36 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/calendarios")
 public class CalendarioController {
     //atributos
-
     @Autowired
     CalendarioService calendarioService;
-
-
-
-
-
     //recordemos que el service(-->repository) es quien contiene las cualidades se aplicarsele "QUERYS" por ende lo nesesitamos para poder "usarlos"
-
-
-
-
-
 //CRUD sobre la entidad
-
-    @GetMapping("/api/calendarios")
+    @GetMapping("/find-all")
     public List<Calendario> findAll(){
         return calendarioService.findAll();
-
     }
 
-
-
-    @PostMapping("/api/calendarios")
+    @PostMapping("/save")
     public ResponseEntity<Calendario> save(@RequestBody Calendario calendario){
-
         return calendarioService.save(calendario);
     }
 
-
-
-
-    @GetMapping("/api/calendarios/{id}")
+    @GetMapping("/find-by-id/{id}")
     public ResponseEntity<Calendario> findById(@PathVariable String id){
         return calendarioService.findById(id);
     }
 
-
-
-
-    @DeleteMapping("/api/calendarios/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Calendario> delete(@PathVariable String id){
         return calendarioService.delete(id);
-
     }
 
-
-
-
-    @PutMapping("/api/calendarios")
+    @PutMapping("/update")
     public ResponseEntity<Calendario> update(@RequestBody Calendario calendario){
         return calendarioService.update(calendario);
-
     }
-
-
 }
 

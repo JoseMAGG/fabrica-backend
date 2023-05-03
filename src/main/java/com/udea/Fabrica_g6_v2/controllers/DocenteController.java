@@ -10,37 +10,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/docentes")
 public class DocenteController {
     @Autowired
     DocenteService docenteService;
 
-
-
-
-    @GetMapping("/api/docentes")
+    @GetMapping("/find-all")
     public List<Docente> findAll() {
         return docenteService.findAll();
     }
 
-    @PostMapping("/api/docentes")
+    @PostMapping("/save")
     public ResponseEntity<Docente> save(@RequestBody Docente docente) {
         return docenteService.save(docente);
     }
 
-    @GetMapping("/api/docentes/{id}")
+    @GetMapping("/find-by-id/{id}")
     public ResponseEntity<Docente> findById(@PathVariable Long id) {
         return docenteService.findById(id);
     }
 
-
-    @DeleteMapping("/api/docentes/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Docente> delete(@PathVariable Long id) {
         return docenteService.delete(id);
     }
 
-    @PutMapping("/api/docentes")
+    @PutMapping("/update")
     public ResponseEntity<Docente> update(@RequestBody Docente docente) {
         return docenteService.update(docente);
     }
 }
-

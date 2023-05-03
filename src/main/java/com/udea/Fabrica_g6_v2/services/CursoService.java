@@ -57,6 +57,7 @@ public class CursoService {
         if(!cursoRepository.existsById(curso.getCodigoCurso())){
             return ResponseEntity.notFound().build();
         }
+
         Curso result = cursoRepository.save(curso);
         return ResponseEntity.ok(result);
     }

@@ -8,9 +8,8 @@ import javax.persistence.*;
 public class Materia {
 
     @Id
-    @Column(name = "id_materia",nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long  id;
+    @Column(name = "id_materia")
+    private Long idMateria;
 
     @Column(name = "nombre")
     private String nombre;
@@ -21,18 +20,18 @@ public class Materia {
     public Materia() {
     }
 
-    public Materia(Long id, String nombre, String lineaEnfasis) {
-        this.id = id;
+    public Materia(Long idMateria, String nombre, String lineaEnfasis) {
+        this.idMateria = idMateria;
         this.nombre = nombre;
         this.lineaEnfasis = lineaEnfasis;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdMateria() {
+        return idMateria;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdMateria(Long id) {
+        this.idMateria = id;
     }
 
     public String getNombre() {
