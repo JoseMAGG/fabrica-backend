@@ -1,15 +1,19 @@
 package com.udea.Fabrica_g6_v2.models;
 
 
+import com.udea.Fabrica_g6_v2.repositories.MateriaRepository;
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "materia")
+@Data
 public class Materia {
 
     @Id
     @Column(name = "id_materia")
-    private Long idMateria;
+    private Integer idMateria;
 
     @Column(name = "nombre")
     private String nombre;
@@ -20,34 +24,8 @@ public class Materia {
     public Materia() {
     }
 
-    public Materia(Long idMateria, String nombre, String lineaEnfasis) {
+    public Materia(Integer idMateria) {
         this.idMateria = idMateria;
-        this.nombre = nombre;
-        this.lineaEnfasis = lineaEnfasis;
-    }
-
-    public Long getIdMateria() {
-        return idMateria;
-    }
-
-    public void setIdMateria(Long id) {
-        this.idMateria = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getLineaEnfasis() {
-        return lineaEnfasis;
-    }
-
-    public void setLineaEnfasis(String lineaEnfasis) {
-        this.lineaEnfasis = lineaEnfasis;
     }
 }
 
