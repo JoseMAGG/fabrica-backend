@@ -1,25 +1,26 @@
 package com.udea.Fabrica_g6_v2.models;
 
-import org.hibernate.annotations.GenericGenerator;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="aula")
+@Data
 public class Aula {
 
     @Column(name = "id_aula", nullable=false )
     @Id
     private String id;
 
-    private Long bloque;
-    private Long  salon;
-    private Long capacidad;
+    private Integer bloque;
+    private Integer salon;
+    private Integer capacidad;
 
     public Aula() {
     }
 
-    public Aula( Long bloque, Long salon, Long capacidad) {
+    public Aula(Integer bloque, Integer salon, Integer capacidad) {
         this.id = (bloque+"-"+salon);
         this.bloque = bloque;
         this.salon = salon;
@@ -34,29 +35,29 @@ public class Aula {
         this.id = (bloque+"-"+salon);
     }
 
-    public Long getBloque() {
+    public Integer getBloque() {
         return bloque;
     }
 
-    public void setBloque(Long bloque) {
+    public void setBloque(Integer bloque) {
         this.bloque = bloque;
         setIdAula();
     }
 
-    public Long getSalon() {
+    public Integer getSalon() {
         return salon;
     }
 
-    public void setSalon(Long salon) {
+    public void setSalon(Integer salon) {
         this.salon = salon;
         setIdAula();
     }
 
-    public Long getCapacidad() {
+    public Integer getCapacidad() {
         return capacidad;
     }
 
-    public void setCapacidad(Long capacidad) {
+    public void setCapacidad(Integer capacidad) {
         this.capacidad = capacidad;
     }
 }

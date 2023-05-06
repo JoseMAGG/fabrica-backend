@@ -1,74 +1,63 @@
 package com.udea.Fabrica_g6_v2.models;
 
+import com.udea.Fabrica_g6_v2.dto.CursoDto;
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "curso")
+@Data
 public class Curso {
     @Id
-    @Column(name="codigo_curso")
-    private Long codigoCurso;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo_curso")
+    private Integer codigoCurso;
 
     @OneToOne
     @JoinColumn(name = "id_materia", referencedColumnName = "id_materia")
-    private Materia idMateria;
+    private Materia materia;
 
-    @Column(name="credits_number")
-    private Long creditos;
+    @Column(name = "programa_academico", updatable = false)
+    private String programaAcademico;
 
-    @Column(name="prerequisito")
-    private String prerequisito;
+    @Column(name = "version_pensum", updatable = false)
+    private Integer versionPensum;
 
-    @Column(name="correquisito")
-    private String correquisito;
+    @Column(name = "creditos")
+    private Integer creditos;
 
-    public Curso(){}
+    @Column(name = "nivel_academico")
+    private Integer nivelAcademico;
 
-    public Curso(Long codigoCurso, Materia idMateria, Long creditos, String prerequisito, String correquisito) {
-        this.codigoCurso = codigoCurso;
-        this.idMateria = idMateria;
-        this.creditos = creditos;
-        this.prerequisito = prerequisito;
-        this.correquisito = correquisito;
-    }
+    @Column(name = "intensidad_horaria")
+    private Integer intensidadHoraria;
 
-    public Long getCodigoCurso() {
-        return codigoCurso;
-    }
+    @Column(name = "sede")
+    private String sede;
 
-    public void setCodigoCurso(Long codigoCurso) {
-        this.codigoCurso = codigoCurso;
-    }
+    @Column(name = "grupos_espejo")
+    private Boolean gruposEspejo;
 
-    public Materia getIdMateria() {
-        return idMateria;
-    }
+    @Column(name = "validable")
+    private Boolean validable;
 
-    public void setIdMateria(Materia idMateria) {
-        this.idMateria = idMateria;
-    }
+    @Column(name = "obligatorio")
+    private Boolean obligatorio;
 
-    public Long getCreditos() {
-        return creditos;
-    }
+    @Column(name = "habilitable")
+    private Boolean habilitable;
 
-    public void setCreditos(Long creditos) {
-        this.creditos = creditos;
-    }
-
-    public String getPrerequisito() {
-        return prerequisito;
-    }
-
-    public void setPrerequisito(String prerequisito) {
-        this.prerequisito = prerequisito;
-    }
-
-    public String getCorrequisito() {
-        return correquisito;
-    }
-
-    public void setCorrequisito(String correquisito) {
-        this.correquisito = correquisito;
+    public void fillFromDto(CursoDto dto){
+        programaAcademico = dto.getProgramaAcademico();
+        versionPensum = dto.getVersionPensum();
+        creditos = dto.getCreditos();
+        nivelAcademico = dto.getNivelAcademico();
+        intensidadHoraria = dto.getIntensidadHoraria();
+        sede = dto.getSede();
+        gruposEspejo = dto.getGruposEspejo();
+        validable = dto.getValidable();
+        obligatorio = dto.getObligatorio();
+        habilitable = dto.getHabilitable();
     }
 }

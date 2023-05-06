@@ -1,5 +1,7 @@
 package com.udea.Fabrica_g6_v2.controllers;
 
+import com.udea.Fabrica_g6_v2.dto.CursoDto;
+import com.udea.Fabrica_g6_v2.dto.MateriaProgramaVersionDto;
 import com.udea.Fabrica_g6_v2.models.Curso;
 import com.udea.Fabrica_g6_v2.services.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +27,22 @@ public class CursoController {
     }
 
     @GetMapping("/find-by-id/{id}")
-    public ResponseEntity<Curso> findById(@PathVariable Long id){
+    public ResponseEntity<Curso> findById(@PathVariable Integer id){
         return cursoService.findById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Curso> delete(@PathVariable Long id){
-        return cursoService.delete(id);
+    @DeleteMapping("/delete")
+    public ResponseEntity<Curso> delete(@RequestBody MateriaProgramaVersionDto dto){
+        return cursoService.delete(dto);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Curso> update(@RequestBody Curso curso){
-        return cursoService.update(curso);
+    public ResponseEntity<Curso> update(@RequestBody CursoDto dto){
+        return cursoService.update(dto);
+    }
+
+    @GetMapping("/get-id")
+    public ResponseEntity<Integer> getId(@RequestBody MateriaProgramaVersionDto dto) {
+        return cursoService.getId(dto);
     }
 }

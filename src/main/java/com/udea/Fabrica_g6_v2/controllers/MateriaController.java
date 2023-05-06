@@ -1,6 +1,6 @@
 package com.udea.Fabrica_g6_v2.controllers;
 
-import com.udea.Fabrica_g6_v2.models.Facultad;
+import com.udea.Fabrica_g6_v2.dto.MateriaIdNameDto;
 import com.udea.Fabrica_g6_v2.models.Materia;
 import com.udea.Fabrica_g6_v2.services.MateriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +19,25 @@ public class MateriaController {
     public List<Materia> findAll(){
         return materiaService.findAll();
     }
+    @GetMapping("/find-by-id/{id}")
+    public ResponseEntity<Materia> findById(@PathVariable Integer id){
+        return materiaService.findById(id);
+    }
+
+    @GetMapping("find-all-ids-and-names")
+    public ResponseEntity<List<MateriaIdNameDto>> getAllIdAndNames(){
+        return materiaService.getAllIdsNames();
+    }
 
     @PostMapping("/save")
     public ResponseEntity<Materia> save(@RequestBody Materia materia){
         return materiaService.save(materia);
     }
 
-    @GetMapping("/find-by-id/{id}")
-    public ResponseEntity<Materia> findById(@PathVariable Long id){
-        return materiaService.findById(id);
-    }
+
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Materia> delete(@PathVariable Long id){
+    public ResponseEntity<Materia> delete(@PathVariable Integer id){
         return materiaService.delete(id);
     }
 
