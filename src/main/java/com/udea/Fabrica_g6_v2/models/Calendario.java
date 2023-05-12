@@ -2,10 +2,13 @@ package com.udea.Fabrica_g6_v2.models;
 
 //import jakarta.persistence.*;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Builder
 @Table(name = "calendario")
 public class Calendario {
 

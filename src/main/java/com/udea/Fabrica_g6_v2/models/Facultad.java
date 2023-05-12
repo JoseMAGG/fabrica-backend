@@ -1,8 +1,11 @@
 package com.udea.Fabrica_g6_v2.models;
 
 //import jakarta.persistence.*;
+import lombok.Builder;
+
 import javax.persistence.*;
 @Entity
+@Builder
 @Table(name = "facultad")
 public class Facultad {
 
