@@ -63,6 +63,12 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<dependency>
+			<groupId>com.heroku.sdk</groupId>
+			<artifactId>heroku-deploy</artifactId>
+			<version>3.0.6</version>
+		</dependency>
 	</dependencies>
 
 	<build>
