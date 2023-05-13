@@ -69,15 +69,15 @@ ________________________________________________________________________
 
 # MATERIAS
 {
-	"id_materia":495,
- 	"nombre":'Algebra',
- 	"linea_enfasis":null
+	"idMateria":495,
+ 	"nombre":"Algebra",
+ 	"lineaEnfasis":null
 }
 _________________________________________________________________________
 {
-	"id_materia":611,
- 	"nombre":'Optimizacion',
- 	"linea_enfasis":'C datos'
+	"idMateria":611,
+ 	"nombre":"Optimizacion",
+ 	"lineaEnfasis":"C datos"
 }
 
 
@@ -243,47 +243,35 @@ _________________________________________________________________
 
 
 # CURSOS
+
 {
-	"codigo_curso":25156,
- 	"id_materia":{
-		"id_materia":611,
- 		"nombre":'Optimizacion',
- 		"linea_enfasis":'C datos'
-			},
- 	"programa_academico":'Ing. Sistemas'
- 	"credits_number":3,
- 	"version_pensum":4,
- 	"nivel_academico":4,
- 	"intensidad_horaria":6,
- 	"sede":'Oriente',
- 	"grupos_espejo":TRUE,
- 	"validable":FALSE,
- 	"obligatorio":FALSE,
- 	"habilitable":FALSE
-    
+    "materia": 611,
+    "programaAcademico": "Ing Sistemas",
+    "versionPensum": 1,
+    "creditos": 2,
+    "nivelAcademico": 1,
+    "intensidadHoraria": 4,
+    "sede": "Oriente",
+    "gruposEspejo": true,
+    "validable": true,
+    "obligatorio": true,
+    "habilitable": true
 }
+
 _______________________________________________________________
 {
-	"codigo_curso":25394,
- 	"id_materia":{
-		"id_materia":495,
- 		"nombre":'Algebra',
- 		"linea_enfasis":null
-			},
- 	"programa_academico":'Tronco Comun',
- 	"credits_number":3,
- 	"version_pensum":5,
- 	"nivel_academico":1,
- 	"intensidad_horaria":6,
- 	"varchar(20),":'Medellin',
- 	"grupos_espejo":TRUE,
- 	"validable":TRUE,
- 	"obligatorio":TRUE,
- 	"habilitable":TRUE
-    
+    "materia": 495,
+    "programaAcademico": "Ing Química",
+    "versionPensum": 1,
+    "creditos": 2,
+    "nivelAcademico": 1,
+    "intensidadHoraria": 4,
+    "sede": "ciudad universitaria",
+    "gruposEspejo": true,
+    "validable": true,
+    "obligatorio": true,
+    "habilitable": true
 }
-
-
 
 
 ########################################################################################################################################
