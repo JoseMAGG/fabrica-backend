@@ -1,13 +1,12 @@
-package com.udea;
+package com.udea.Fabrica_g6_v2;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FabricaG6V2ApplicationTests {
+class Fabricag6v2Tests {
+    @Test
+    void contextLoad(){
 
-	@Test
-	void contextLoads() {
-	}
-
+    }
 }

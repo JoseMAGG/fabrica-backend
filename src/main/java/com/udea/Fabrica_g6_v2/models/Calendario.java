@@ -6,9 +6,11 @@ import lombok.Builder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
 
 @Entity
 @Builder
+@AllArgsConstructor
 @Table(name = "calendario")
 public class Calendario {
 

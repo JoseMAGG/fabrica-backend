@@ -2,7 +2,7 @@ package com.udea.Fabrica_g6_v2.services;
 
 
 import com.udea.Fabrica_g6_v2.models.ViceDecano;
-import com.udea.Fabrica_g6_v2.repositories.ViceDecanoRepository;
+import com.udea.Fabrica_g6_v2.repository.ViceDecanoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
