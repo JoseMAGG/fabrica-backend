@@ -3,40 +3,23 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
-name: SonarCloud
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    types: [opened, synchronize, reopened]
-jobs:
-  build:
-    name: Build and analyze
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: 'zulu' # Alternative distribution options are available.
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-      - name: Build and analyze
-        env:
-          GITHUB_TOKEN: $(System.AccessToken)  # Needed to get PR information, if any
-          SONAR_TOKEN: $(SONAR_TOKEN)
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.qualitygate.wait=true -Dsonar.projectKey=Fabrica_g6_v2
+# pipeline.yml
+ 
+# Definir las etapas del pipeline
+stages:
+  - build
+  - sonar
+ 
+# Etapa de construcción
+build:
+  image: maven:3.8.1
+  stage: build
+  script:
+    - mvn clean package
+ 
+# Etapa de análisis con SonarCloud
+sonar:
+  image: maven:3.8.1
+  stage: sonar
+  script:
+    - mvn sonar:sonar -Dsonar.projectKey=Fabrica_g6_v2 -Dsonar.organization=fabricaescuelag6 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6af2d32d985705be90ae8aa30f4c88dc29ad830d
