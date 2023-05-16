@@ -4,42 +4,39 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 name: SonarCloud
-trigger:
-  branches:
-    include:
+on:
+  push:
+    branches:
       - master
-pr:
-  branches:
-    include:
-      - '*'
- 
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
-  - job: BuildAndAnalyze
-    displayName: 'Build and analyze'
-    pool:
-      vmImage: 'ubuntu-latest'
+  build:
+    name: Build and analyze
+    runs-on: ubuntu-latest
     steps:
-      - checkout: self
-        fetchDepth: 0  # Shallow clones should be disabled for a better relevancy of analysis
- 
-      - task: UseJavaVersion@1
-        inputs:
-          versionSpec: '17'
-          addToPath: true
- 
-      - task: Cache@2
-        inputs:
-          key: '$(Agent.OS)-sonar'
-          restoreKeys: '$(Agent.OS)-sonar'
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu' # Alternative distribution options are available.
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
           path: ~/.sonar/cache
- 
-      - task: Cache@2
-        inputs:
-          key: $(runner.os)-m2-$(hashFiles('**/pom.xml'))  #hola
-          restoreKeys: '$(Agent.OS)-m2'
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
           path: ~/.m2
- 
-      - script: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.qualitygate.wait=true -Dsonar.projectKey=Fabrica_g6_v2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
         env:
-          GITHUB_TOKEN: $(System.AccessToken)
+          GITHUB_TOKEN: $(System.AccessToken)  # Needed to get PR information, if any
           SONAR_TOKEN: $(SONAR_TOKEN)
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.qualitygate.wait=true -Dsonar.projectKey=Fabrica_g6_v2
