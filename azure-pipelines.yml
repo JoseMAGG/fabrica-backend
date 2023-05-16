@@ -1,0 +1,45 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+name: SonarCloud
+trigger:
+  branches:
+    include:
+      - master
+pr:
+  branches:
+    include:
+      - '*'
+ 
+jobs:
+  - job: BuildAndAnalyze
+    displayName: 'Build and analyze'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - checkout: self
+        fetchDepth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+ 
+      - task: UseJavaVersion@1
+        inputs:
+          versionSpec: '17'
+          addToPath: true
+ 
+      - task: Cache@2
+        inputs:
+          key: '$(Agent.OS)-sonar'
+          restoreKeys: '$(Agent.OS)-sonar'
+          path: ~/.sonar/cache
+ 
+      - task: Cache@2
+        inputs:
+          key: '$(Agent.OS)-m2-${{ hashFiles(''**/pom.xml'') }}'
+          restoreKeys: '$(Agent.OS)-m2'
+          path: ~/.m2
+ 
+      - script: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.qualitygate.wait=true -Dsonar.projectKey=Fabrica_g6_v2
+        env:
+          GITHUB_TOKEN: $(System.AccessToken)
+          SONAR_TOKEN: $(SONAR_TOKEN)
