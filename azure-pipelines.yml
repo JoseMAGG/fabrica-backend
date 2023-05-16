@@ -35,7 +35,7 @@ jobs:
  
       - task: Cache@2
         inputs:
-          key: '$(Agent.OS)-m2-${{ hashFiles(''**/pom.xml'') }}'
+          key: '$(Agent.OS)-m2-${{ hashFiles("**/pom.xml") }}'
           restoreKeys: '$(Agent.OS)-m2'
           path: ~/.m2
  
