@@ -59,7 +59,7 @@ class CalendarioTest {
 
         //assertEquals(facultad.getId() + "-" + semestre, calendario.getId());
         //assertEquals(facultad.getId(), calendario.getFacultad().getId());
-        //assertEquals(semestre, calendario.getSemestre());
+        assertEquals(semestre, calendario.getSemestre());
         assertEquals(publicacionOferta, calendario.getPublicacionOferta());
         assertEquals(inicioMatriculas, calendario.getInicioMatriculas());
         assertEquals(finMatriculas, calendario.getFinMatriculas());
@@ -80,25 +80,6 @@ class CalendarioTest {
 
 
 
-
-/*    public Calendario(Facultad facultad, String semestre, LocalDate publicacionOferta, LocalDate inicioMatriculas, LocalDate finMatriculas, LocalDate inicioAjustes, LocalDate finAjustes, LocalDate inicioClases, LocalDate finClases, LocalDate inicioExamenesFinales, LocalDate finExamenesFinales, LocalDate inicioValidaciones, LocalDate finValidaciones, LocalDate inicioHabilitaciones, LocalDate finHabilitaciones, LocalDate terminacionOficinal) {
-        this.id = (facultad.getId()+"-"+semestre);
-        this.facultad = facultad;
-        this.publicacionOferta = publicacionOferta;
-        this.inicioMatriculas = inicioMatriculas;
-        this.finMatriculas = finMatriculas;
-        this.inicioAjustes = inicioAjustes;
-        this.finAjustes = finAjustes;
-        this.inicioClases = inicioClases;
-        this.finClases = finClases;
-        this.inicioExamenesFinales = inicioExamenesFinales;
-        this.finExamenesFinales = finExamenesFinales;
-        this.inicioValidaciones = inicioValidaciones;
-        this.finValidaciones = finValidaciones;
-        this.inicioHabilitaciones = inicioHabilitaciones;
-        this.finHabilitaciones = finHabilitaciones;
-        this.terminacionOficinal = terminacionOficinal;
-    }*/
 
 
 }

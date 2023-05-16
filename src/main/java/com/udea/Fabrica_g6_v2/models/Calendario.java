@@ -75,6 +75,7 @@ public class Calendario {
     public Calendario( Facultad facultad, String semestre, LocalDate publicacionOferta, LocalDate inicioMatriculas, LocalDate finMatriculas, LocalDate inicioAjustes, LocalDate finAjustes, LocalDate inicioClases, LocalDate finClases, LocalDate inicioExamenesFinales, LocalDate finExamenesFinales, LocalDate inicioValidaciones, LocalDate finValidaciones, LocalDate inicioHabilitaciones, LocalDate finHabilitaciones, LocalDate terminacionOficinal) {
         this.id = (facultad.getId()+"-"+semestre);
         this.facultad = facultad;
+        this.semestre = semestre;
         this.publicacionOferta = publicacionOferta;
         this.inicioMatriculas = inicioMatriculas;
         this.finMatriculas = finMatriculas;
