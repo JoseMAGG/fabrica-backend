@@ -2,10 +2,15 @@ package com.udea.Fabrica_g6_v2.models;
 
 //import jakarta.persistence.*;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
 
 @Entity
+@Builder
+@AllArgsConstructor
 @Table(name = "calendario")
 public class Calendario {
 
@@ -70,6 +75,7 @@ public class Calendario {
     public Calendario( Facultad facultad, String semestre, LocalDate publicacionOferta, LocalDate inicioMatriculas, LocalDate finMatriculas, LocalDate inicioAjustes, LocalDate finAjustes, LocalDate inicioClases, LocalDate finClases, LocalDate inicioExamenesFinales, LocalDate finExamenesFinales, LocalDate inicioValidaciones, LocalDate finValidaciones, LocalDate inicioHabilitaciones, LocalDate finHabilitaciones, LocalDate terminacionOficinal) {
         this.id = (facultad.getId()+"-"+semestre);
         this.facultad = facultad;
+        this.semestre = semestre;
         this.publicacionOferta = publicacionOferta;
         this.inicioMatriculas = inicioMatriculas;
         this.finMatriculas = finMatriculas;
