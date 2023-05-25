@@ -3,7 +3,7 @@ package com.udea.Fabrica_g6_v2.services;
 
 
 import com.udea.Fabrica_g6_v2.models.Calendario;
-import com.udea.Fabrica_g6_v2.repositories.CalendarioRepository;
+import com.udea.Fabrica_g6_v2.repository.CalendarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

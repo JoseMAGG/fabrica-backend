@@ -1,7 +1,14 @@
 package com.udea.Fabrica_g6_v2.models;
 
-//import jakarta.persistence.*;
 import javax.persistence.*;
+import lombok.*;
+
+import javax.persistence.*;
+
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "vice_decano")
 public class ViceDecano {
@@ -17,17 +24,6 @@ public class ViceDecano {
 
     @JoinColumn(name = "name_facultad")
     private String nameFacultad;
-
-    public ViceDecano() {
-    }
-
-    public ViceDecano(Long idPersona, String nombre, String email, String oficina, String nameFacultad) {
-        this.idPersona = idPersona;
-        this.nombre = nombre;
-        this.email = email;
-        this.oficina = oficina;
-        this.nameFacultad = nameFacultad;
-    }
 
     public Long getIdPersona() {
         return idPersona;

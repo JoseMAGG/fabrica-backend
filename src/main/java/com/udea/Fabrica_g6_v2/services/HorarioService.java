@@ -1,8 +1,8 @@
 package com.udea.Fabrica_g6_v2.services;
 
 
-import com.udea.Fabrica_g6_v2.models.ViceDecano;
-import com.udea.Fabrica_g6_v2.repository.ViceDecanoRepository;
+import com.udea.Fabrica_g6_v2.models.Horario;
+import com.udea.Fabrica_g6_v2.repositories.HorarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
-public class ViceDecanoService {
+public class HorarioService {
     @Autowired
-    ViceDecanoRepository viceDecanoRepository;
-
-    public List<ViceDecano> findAll(){
+    HorarioRepository horarioRepository;
+    public List<Horario> findAll(){
         //capturar y enviar los elementos de la bas de datos
-        return viceDecanoRepository.findAll();
+        return horarioRepository.findAll();
 
     }
 
@@ -27,10 +25,10 @@ public class ViceDecanoService {
 
     //crear un Nuevo elemento
 
-    public ResponseEntity<ViceDecano> save(@RequestBody ViceDecano viceDecano){
+    public ResponseEntity<Horario> save(@RequestBody Horario horario){
 
         //guardar
-        ViceDecano result= viceDecanoRepository.save(viceDecano);
+        Horario result= horarioRepository.save(horario);
 
         return  ResponseEntity.ok(result);
     }
@@ -40,12 +38,12 @@ public class ViceDecanoService {
 
     //buscar segun su id
 
-    public ResponseEntity<ViceDecano> findById(@PathVariable Long id){
+    public ResponseEntity<Horario> findById(@PathVariable String id){
         //usamos siempre un optional para no tratar con excepciones de alcance por id, debido a un id incorrecto
-        Optional<ViceDecano> optionalViceDecano= viceDecanoRepository.findById(id);
-        if(optionalViceDecano.isPresent())
+        Optional<Horario> optionalHorario= horarioRepository.findById(id);
+        if(optionalHorario.isPresent())
             //si existe lo devuelvo
-            return  ResponseEntity.ok(optionalViceDecano.get());
+            return  ResponseEntity.ok(optionalHorario.get());
         else
             //si no existe debolvemos un 404 con un response entity
             return ResponseEntity.notFound().build();
@@ -56,12 +54,12 @@ public class ViceDecanoService {
 
     //borrar un elemento de la DB
 
-    public ResponseEntity<ViceDecano> delete(@PathVariable Long id){
+    public ResponseEntity<Horario> delete(@PathVariable String id){
 
-        if (!viceDecanoRepository.existsById(id)) { //si el Id NO existe (NUMEO MUY GRANDE)
+        if (!horarioRepository.existsById(id)) { //si el Id NO existe (NUMEO MUY GRANDE)
             return ResponseEntity.notFound().build();
         }
-        viceDecanoRepository.deleteById(id);
+        horarioRepository.deleteById(id);
         return ResponseEntity.noContent().build();
 
     }
@@ -71,15 +69,15 @@ public class ViceDecanoService {
 
     //actualizar un elemento existente
 
-    public ResponseEntity<ViceDecano> update(@RequestBody ViceDecano viceDecano){
-        if(viceDecano.getIdPersona()==null){ //no le mande un id
+    public ResponseEntity<Horario> update(@RequestBody Horario horario){
+        if(horario.getId()==null){ //no le mande un id
             return ResponseEntity.badRequest().build();
         }
-        if(!viceDecanoRepository.existsById(viceDecano.getIdPersona())){ //si el Id NO existe (NUMEO MUY GRANDE)
+        if(!horarioRepository.existsById(horario.getId())){ //si el Id NO existe (NUMEO MUY GRANDE)
             return ResponseEntity.notFound().build();
         }
         //de lo contrario
-        ViceDecano result= viceDecanoRepository.save(viceDecano);
+        Horario result= horarioRepository.save(horario);
         return ResponseEntity.ok(result);
 
 
@@ -87,3 +85,4 @@ public class ViceDecanoService {
 
 
 }
+
