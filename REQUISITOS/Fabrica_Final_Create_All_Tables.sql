@@ -87,20 +87,22 @@ create table curso (
                                references materia (id_materia)
 );
 
-create table grupo (
-                       id_grupo varchar(10),
-                       codigo_curso int(5),
-                       numero numeric(2),
-                       cupos numeric(2),
-                       docente numeric(15),
-                       constraint fk_course_code
-                           foreign key (codigo_curso)
-                               references curso (codigo_curso),
-                       constraint fk_docente
-                           foreign key (docente)
-                               references docente(id_docente),
-                       primary key (id_grupo)
+create table grupo
+(
+    id_grupo     varchar(10),
+    codigo_curso int(5),
+    numero       numeric(2),
+    cupos        numeric(2),
+    docente      numeric(15),
+    constraint fk_course_code
+        foreign key (codigo_curso)
+            references curso (codigo_curso),
+    constraint fk_docente
+        foreign key (docente)
+            references docente (id_docente),
+    primary key (id_grupo)
 );
+
 
 create table horario (
                          id varchar(17),

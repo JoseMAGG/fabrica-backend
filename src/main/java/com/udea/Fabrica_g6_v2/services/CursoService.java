@@ -9,6 +9,7 @@ import com.udea.Fabrica_g6_v2.models.Materia;
 import com.udea.Fabrica_g6_v2.repositories.CursoRepository;
 import com.udea.Fabrica_g6_v2.repositories.MateriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -27,17 +28,24 @@ public class CursoService {
         return cursoRepository.findAll();
     }
 
-    public ResponseEntity<Curso> save(Curso curso){
+    public ResponseEntity<Curso> save(CursoDto cursoDto){
+
         //Validar que no existe
         MateriaProgramaVersionDto dto =
-                new MateriaProgramaVersionDto(curso.getMateria().getIdMateria(),
-                        curso.getProgramaAcademico(), curso.getVersionPensum());
+                new MateriaProgramaVersionDto(cursoDto.getMateria().getIdMateria(),
+                        cursoDto.getProgramaAcademico(), cursoDto.getVersionPensum());
         if(getId(dto).hasBody())
             return ResponseEntity.status(409).build();
 
+        Curso newCurso = newCursoFromDto(cursoDto);
+
         //Guardar
-        Curso result = cursoRepository.save(curso);
-        return ResponseEntity.ok(result);
+        try {
+            Curso result= cursoRepository.save(newCurso);
+            return ResponseEntity.ok(result);
+        }catch (DataIntegrityViolationException e){
+            return ResponseEntity.unprocessableEntity().build();
+        }
     }
 
     public ResponseEntity<Curso> findById(Integer id){
@@ -73,20 +81,16 @@ public class CursoService {
             return ResponseEntity.notFound().build();
 
         //Dto a curso
-        Curso newCurso = new Curso();
+        Curso newCurso = newCursoFromDto(inDto);
         newCurso.setCodigoCurso(id.getBody());
 
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-
-        Materia materia = materiaRepository.getById(inDto.getMateria().getIdMateria());
-        newCurso.setMateria(materia);
-        newCurso.fillFromDto(inDto);
-
         //Guardar
-        Curso result = cursoRepository.save(newCurso);
-        return ResponseEntity.ok(result);
+        try {
+            Curso result= cursoRepository.save(newCurso);
+            return ResponseEntity.ok(result);
+        }catch (DataIntegrityViolationException e){
+            return ResponseEntity.unprocessableEntity().build();
+        }
     }
 
     public ResponseEntity<Integer> getId(MateriaProgramaVersionDto dto){
@@ -96,5 +100,14 @@ public class CursoService {
                 (materia, dto.getProgramaAcademico(), dto.getVersionPensum());
         if(!curso.isPresent()) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(curso.get().getCodigoCurso());
+    }
+
+    private Curso newCursoFromDto(CursoDto dto){
+        Curso newCurso = new Curso();
+
+        Materia materia = materiaRepository.getById(dto.getMateria().getIdMateria());
+        newCurso.setMateria(materia);
+        newCurso.fillFromDto(dto);
+        return newCurso;
     }
 }

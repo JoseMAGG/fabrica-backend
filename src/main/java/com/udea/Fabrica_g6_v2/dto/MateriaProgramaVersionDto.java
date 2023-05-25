@@ -1,6 +1,7 @@
 package com.udea.Fabrica_g6_v2.dto;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
 public class MateriaProgramaVersionDto {
@@ -8,11 +9,13 @@ public class MateriaProgramaVersionDto {
     private String programaAcademico;
     private Integer versionPensum;
 
-    public MateriaProgramaVersionDto(Integer idMateria, String programa, Integer version) {
+    public MateriaProgramaVersionDto(){} //Necesario para serializar el Json
+    public MateriaProgramaVersionDto(Integer idMateria, String programaAcademico, Integer versionPensum) {
         this.idMateria = idMateria;
-        this.programaAcademico = programa;
-        this.versionPensum = version;
+        this.programaAcademico = programaAcademico;
+        this.versionPensum = versionPensum;
     }
+
 
     public boolean hasNull() {
         return idMateria == null || programaAcademico == null || versionPensum == null;
