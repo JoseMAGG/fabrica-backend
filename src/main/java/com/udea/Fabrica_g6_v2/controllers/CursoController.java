@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("localhost:5173/") //Puerto del front-end
 @RestController
 @RequestMapping("/cursos")
 public class CursoController {
