@@ -25,7 +25,7 @@ create table docente (
 create table materia (
                          id_materia numeric(3),
                          nombre varchar(30),
-                         linea_enfasis varchar(10),
+                         linea_enfasis varchar(30),
                          primary key (id_materia)
 );
 
@@ -39,7 +39,7 @@ create table aula (
 
 CREATE TABLE facultad(
                          id numeric(2),
-                         nombre varchar(20),
+                         nombre varchar(40),
                          id_decano numeric(15),
                          id_vicedecano numeric(15),
                          FOREIGN KEY (id_vicedecano) REFERENCES vice_decano(id_vicedecano),
@@ -71,12 +71,12 @@ CREATE TABLE calendario(
 create table curso (
                        codigo_curso int(5) auto_increment,
                        id_materia numeric(3),
-                       programa_academico varchar(20),
+                       programa_academico varchar(60),
                        creditos numeric(2),
                        version_pensum numeric(2),
                        nivel_academico numeric(2),
                        intensidad_horaria numeric(2),
-                       sede varchar(20),
+                       sede varchar(50),
                        grupos_espejo boolean,
                        validable boolean,
                        obligatorio boolean,
@@ -87,20 +87,22 @@ create table curso (
                                references materia (id_materia)
 );
 
-create table grupo (
-                       id_grupo varchar(10),
-                       codigo_curso int(5),
-                       numero numeric(2),
-                       cupos numeric(2),
-                       docente numeric(15),
-                       constraint fk_course_code
-                           foreign key (codigo_curso)
-                               references curso (codigo_curso),
-                       constraint fk_docente
-                           foreign key (docente)
-                               references docente(id_docente),
-                       primary key (id_grupo)
+create table grupo
+(
+    id_grupo     varchar(10),
+    codigo_curso int(5),
+    numero       numeric(2),
+    cupos        numeric(2),
+    docente      numeric(15),
+    constraint fk_course_code
+        foreign key (codigo_curso)
+            references curso (codigo_curso),
+    constraint fk_docente
+        foreign key (docente)
+            references docente (id_docente),
+    primary key (id_grupo)
 );
+
 
 create table horario (
                          id varchar(17),

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("localhost:5173/") //Puerto del front-end
 @RestController
 @RequestMapping("/cursos")
 public class CursoController {
@@ -22,8 +23,8 @@ public class CursoController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Curso> save(@RequestBody Curso curso){
-        return cursoService.save(curso);
+    public ResponseEntity<Curso> save(@RequestBody CursoDto cursoDto){
+        return cursoService.save(cursoDto);
     }
 
     @GetMapping("/find-by-id/{id}")
